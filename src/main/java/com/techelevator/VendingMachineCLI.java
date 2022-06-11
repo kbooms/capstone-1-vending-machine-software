@@ -4,9 +4,15 @@ import com.techelevator.view.Menu;
 
 public class VendingMachineCLI {
 
+	//added Values
+
+	private static final String MAIN_MENU_OPTION_EXIT = "Exit";
+
+	private static final String MAIN_MENU_OPTION_REPORT = "Sales Report";
+//ogcode
 	private static final String MAIN_MENU_OPTION_DISPLAY_ITEMS = "Display Vending Machine Items";
 	private static final String MAIN_MENU_OPTION_PURCHASE = "Purchase";
-	private static final String[] MAIN_MENU_OPTIONS = { MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE };
+	private static final String[] MAIN_MENU_OPTIONS = { MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE, MAIN_MENU_OPTION_EXIT, MAIN_MENU_OPTION_REPORT };
 
 	private Menu menu;
 
@@ -22,6 +28,10 @@ public class VendingMachineCLI {
 				// display vending machine items
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				// do purchase
+			}else if (choice.equals(MAIN_MENU_OPTION_EXIT)){
+				//end program
+			}else if (choice.equals(MAIN_MENU_OPTION_REPORT)){
+				//secret programs
 			}
 		}
 	}
