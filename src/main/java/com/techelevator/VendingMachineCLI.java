@@ -21,11 +21,14 @@ public class VendingMachineCLI {
 	}
 
 	public void run() {
+		LoadMachine restock = new LoadMachine();
+
 		while (true) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 				// display vending machine items
+
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				// do purchase
 			}else if (choice.equals(MAIN_MENU_OPTION_EXIT)){

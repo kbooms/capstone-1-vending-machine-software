@@ -7,53 +7,39 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class LoadMachine {
-
+//map and file path
     Map<String, Product> products = new HashMap<>();
-    File productInventory = new File("C:\\Users\\bcame\\Documents\\Java work\\Capstone Section\\capstone-1\\vendingmachine.csv");
-    int count = 0;
-    Product test = new Product("","",0,"");
+    File productInventory = new File("vendingmachine.csv");
 
-
+//method for assigning data from file to map
     {
         try {
+            //reading file
            Scanner inventoryInput = new Scanner(productInventory);
 
            while (inventoryInput.hasNextLine()){
+               //splitting line into values
                String lineOfInput = inventoryInput.nextLine();
-                String[] splitLine = lineOfInput.split("|");
-
-               for (String index: splitLine){
-                   if (count == 0){
-                       test.setKey(index);
-                       count++;
-                   }else if(count == 1){
-                       test.setName(index);
-                       count++;
-                   }else if (count == 3){
-                       double newCost = Double.parseDouble(index);
-                       test.setCost(newCost);
-                       count++;
-                   }else if(count == 4){
-                       test.setType(index);
-                   }
-               }
-               products.put(test.getKey(), test);
-               System.out.println(splitLine);
+               String[] splitLine = lineOfInput.split("[|]");
+            //assign values?
+               Product object = new Product(splitLine[0],splitLine[1],Double.parseDouble(splitLine[2]),splitLine[3] );
+                //hopefully adding each new line to a different spot in map
+               products.put(object.getKey(), object);
 
            }
 
-
-
+            //file not found catch
         } catch (FileNotFoundException e) {
             System.err.println("Inventory not found.");
         }
     }
 
-    //reading code
-
-    //assigning code
-
-    //adding product -> map
+    //Printing out products for options 1 and 2
+    public void showProducts() {
+        for (int i = 0; i < products.size(); i++) {
+            System.out.println(products.get(i).getKey() + products.get(i).getName() + products.get(i).getCost() );
+        }
+    }
 
 
 }

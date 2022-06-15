@@ -19,6 +19,7 @@ public class Product {
 
     }
     //message method
+    //split case so recall getType() of product for purchase
     public String getMessage(){
 
         String message = "";
