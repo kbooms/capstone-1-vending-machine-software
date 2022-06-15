@@ -35,10 +35,11 @@ public class LoadMachine {
     }
 
     //Printing out products for options 1 and 2
-    public void showProducts() {
-        for (int i = 0; i < products.size(); i++) {
-            System.out.println(products.get(i).getKey() + products.get(i).getName() + products.get(i).getCost() );
+    public String showProducts(LoadMachine restock) {
+        for (String key: products.keySet()) {
+            System.out.println(products.get(key).getKey() + " | " + products.get(key).getName() + " | " + products.get(key).getCost() );
         }
+        return "Back to Main menu.";
     }
 
 

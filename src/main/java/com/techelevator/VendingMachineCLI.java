@@ -2,7 +2,7 @@ package com.techelevator;
 
 import com.techelevator.view.Menu;
 
-public class VendingMachineCLI {
+public class VendingMachineCLI extends LoadMachine {
 
 	//added Values
 
@@ -28,7 +28,7 @@ public class VendingMachineCLI {
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 				// display vending machine items
-
+				showProducts(restock);
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				// do purchase
 			}else if (choice.equals(MAIN_MENU_OPTION_EXIT)){
