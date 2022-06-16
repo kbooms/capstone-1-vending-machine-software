@@ -2,13 +2,12 @@ package com.techelevator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class LoadMachine {
 //map and file path
     Map<String, Product> products = new HashMap<>();
+    List<String> keys = new ArrayList<>();
     File productInventory = new File("vendingmachine.csv");
 
 //method for assigning data from file to map
@@ -25,6 +24,7 @@ public class LoadMachine {
                Product object = new Product(splitLine[0],splitLine[1],Double.parseDouble(splitLine[2]),splitLine[3] );
                 //hopefully adding each new line to a different spot in map
                products.put(object.getKey(), object);
+               keys.add(splitLine[0]);
 
            }
 
@@ -36,8 +36,11 @@ public class LoadMachine {
 
     //Printing out products for options 1 and 2
     public String showProducts(LoadMachine restock) {
-        for (String key: products.keySet()) {
-            System.out.println(products.get(key).getKey() + " | " + products.get(key).getName() + " | " + products.get(key).getCost() );
+
+
+        for (int i = 0; i < keys.size(); i++) {
+
+            System.out.println(products.get(keys.get(i)).getKey() + " | " + products.get(keys.get(i)).getName() + " | " + products.get(keys.get(i)).getCost() );
         }
         return "Back to Main menu.";
     }
