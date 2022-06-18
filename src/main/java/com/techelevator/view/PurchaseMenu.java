@@ -55,7 +55,7 @@ public class PurchaseMenu extends Menu{
             int optionNum = i + 1;
             out.println("(" + optionNum + ") " + options[i]);
         }
-        out.print(System.lineSeparator() + "Please choose a number corresponding with the requested option: ");
+        out.print(System.lineSeparator() + noFeedBalance + System.lineSeparator() + "Please choose a number corresponding with the requested option: ");
         out.flush();
     }
 

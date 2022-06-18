@@ -25,6 +25,7 @@ public class VendingMachineCLI extends LoadMachine {
 	//new purchase menu item for run method
 	private PurchaseMenu purchaseMenu;
 
+	//added purchase menu to the cli constructor
 	public VendingMachineCLI(Menu menu, PurchaseMenu purchaseMenu) {
 		this.menu = menu; this.purchaseMenu = purchaseMenu;
 	}
@@ -48,7 +49,7 @@ public class VendingMachineCLI extends LoadMachine {
 			}
 		}
 	}
-//breakpoint in main. Need to instant purchaseMenu?
+//BreakPoint fixed, needed to add purchaseMenu into the code as a new object and into the vending cli
 	public static void main(String[] args) {
 		Menu menu = new Menu(System.in, System.out);
 		PurchaseMenu purchaseMenu = new PurchaseMenu(System.in, System.out);
