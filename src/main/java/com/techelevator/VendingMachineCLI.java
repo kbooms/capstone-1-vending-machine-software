@@ -17,6 +17,7 @@ public class VendingMachineCLI extends LoadMachine {
 	//added Menu code
 	private static final String MAIN_MENU_OPTION_EXIT = "Exit";
 	private static final String MAIN_MENU_OPTION_REPORT = "Sales Report";
+
 	//String[] builders
 	private static final String[] MAIN_MENU_OPTIONS = { MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE, MAIN_MENU_OPTION_EXIT, MAIN_MENU_OPTION_REPORT };
 	private static final String[] PURCHASE_MENU_OPTIONS = {PURCHASE_MENU_FEED_MONEY,PURCHASE_MENU_SELECT_PRODUCT,PURCHASE_MENU_FINISH};
@@ -40,8 +41,25 @@ public class VendingMachineCLI extends LoadMachine {
 				// display vending machine items
 				showProducts(restock);
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
-				// do purchase
+				// show purchase menu
 				String choice2 = (String) purchaseMenu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
+
+				if (choice2.equals(PURCHASE_MENU_FEED_MONEY)){
+					//add to balance in terms of 1,2,5,10,20s
+					//adjust balance shown in menu to new balance
+					//return to purchase menu
+				}else if (choice2.equals(PURCHASE_MENU_SELECT_PRODUCT)){
+					//display products
+					//allow input of which 'key' to buy
+					// remove cost from balance
+					//reduce inventory by 1 for that key
+					//print message
+					//return to Purchase menu
+				}else if (choice2.equals(PURCHASE_MENU_FINISH)){
+					//"return" balance left in machine in quarters, dimes, nickles
+					//set balance back to 0
+					//return to main menu
+				}
 			}else if (choice.equals(MAIN_MENU_OPTION_EXIT)){
 				//end program
 			}else if (choice.equals(MAIN_MENU_OPTION_REPORT)){
