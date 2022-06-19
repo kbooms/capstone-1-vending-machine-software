@@ -1,14 +1,19 @@
 package com.techelevator;
 
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class PurchaseLogger {
 
     public static void logPurchase(String message){
         File search = new File("log.txt");
+        LocalDateTime dateTime = LocalDateTime.now();
+        DateTimeFormatter formattedDateTime = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss");
+        String formatted = dateTime.format(formattedDateTime);
 
         try(PrintWriter logWriter = new PrintWriter(new FileOutputStream(search, true))){
-            logWriter.println(message);
+            logWriter.println(formatted + " " + message);
 
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);

@@ -15,6 +15,10 @@ public class PurchaseMenu extends Menu{
 
     //balance
     private double balance;
+    private double adjustedBalance;
+
+    private String adjustedBal = String.format("%.2f",getAdjustedBalance());
+    private String bal = String.format("%.2f",getBalance());
 
    //super constructor borrowed from menu
     public PurchaseMenu(InputStream input, OutputStream output) {
@@ -55,7 +59,7 @@ public class PurchaseMenu extends Menu{
             int optionNum = i + 1;
             out.println("(" + optionNum + ") " + options[i]);
         }
-        out.printf(System.lineSeparator() + "Current provided balance: $ %.2f"  + System.lineSeparator() + "Please choose a number corresponding with the requested option: ",getBalance());
+        out.printf(System.lineSeparator() + "Current provided balance: $ %.2f"  + System.lineSeparator() + "Please choose a number corresponding with the requested option: ",getAdjustedBalance());
         out.flush();
     }
 
@@ -79,19 +83,20 @@ public class PurchaseMenu extends Menu{
         double dime = 0.10;
 
         //round balance down
-        double modQuarters = ( (double)(int) Math.round((balance % quarter)*100) / 100.0);
+        double modQuarters = ( (double)(int) Math.round((adjustedBalance % quarter)*100) / 100.0);
         double modDimes = ( (double)(int) Math.round((modQuarters % dime)*100) / 100.0);
         double modNickles = ( (double)(int) Math.round((modQuarters) % nickle)*100)/100.0;
 
         //count coins up
-        int numQuarters = (int)((balance-modQuarters) / (quarter));
+        int numQuarters = (int)((adjustedBalance-modQuarters) / (quarter));
         int numDimes = (int)((modQuarters-modDimes)/(dime));
         int numNickles = (int)((modDimes-modNickles)/(nickle));
 
         System.out.println("Calculating your change, please wait...");
         //display amounts to user
-        System.out.println(System.lineSeparator() + balance + " returning to you in the form of: "+ numQuarters+" quarters, " + numDimes + " dimes, and " + numNickles+ " nickles.");
+        System.out.println(System.lineSeparator() + getAdjustedBal() + " returning to you in the form of: "+ numQuarters+" quarters, " + numDimes + " dimes, and " + numNickles+ " nickles.");
         //reset balance
+        this.adjustedBalance = 0;
         this.balance = 0;
 
         return this.balance;
@@ -100,17 +105,37 @@ public class PurchaseMenu extends Menu{
     //feed balance method
     public double feedBalance(int feed){
         this.balance = getBalance() + feed;
+        this.adjustedBalance = balance;
+        this.bal = getBal();
+        this.adjustedBal = getAdjustedBal();
         return this.balance;
     }
 
     //remove balance method
     public double removeBalance(double cost){
-        this.balance = getBalance() - cost;
-        return this.balance;
+
+        if(cost == 0){
+            this.adjustedBalance = getBalance();
+            this.adjustedBal = getBal();
+        }
+        this.adjustedBalance = getBalance() - cost;
+        this.adjustedBal = getAdjustedBal();
+        return this.adjustedBalance;
     }
 
     //getter
     public double getBalance() {
         return balance;
+    }
+    public double getAdjustedBalance(){
+        return adjustedBalance;
+    }
+
+    public String getAdjustedBal() {
+        return adjustedBal;
+    }
+
+    public String getBal() {
+        return bal;
     }
 }

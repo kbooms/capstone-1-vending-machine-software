@@ -55,7 +55,6 @@ public class VendingMachineCLI {
 						loadMachine.showProducts();
 						//allow input of which 'key' to buy
 						purchase.purchasing();
-						logger.logPurchase(purchase.getTempProductKey() + " $" + purchaseMenu.getBalance());
 						// v make into a helper menu?
 						if((!loadMachine.getProducts().containsKey(purchase.getTempProductKey()) || loadMachine.getProducts().get(purchase.getTempProductKey()).getInventory() == 0)){
 							System.out.println("Sorry that item is unavailable, returning to purchase menu: ");
@@ -65,6 +64,7 @@ public class VendingMachineCLI {
 							loadMachine.getProducts().get(purchase.getTempProductKey()).getReducedInventory(true);
 
 						}
+						logger.logPurchase(loadMachine.getProducts().get(purchase.getTempProductKey()).getName() + " $" + purchaseMenu.getBal() + " $" + purchaseMenu.getAdjustedBal());
 						//remove cost from balance
 						//reduce inventory by 1 for that key
 						//print message
