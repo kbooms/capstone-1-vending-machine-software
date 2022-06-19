@@ -14,7 +14,7 @@ public class PurchaseMenu extends Menu{
     private String noFeedBalance = "Current Money Provided: " + "$0.00" ;
 
     //balance
-    private double balance = 0;
+    private double balance;
 
    //super constructor borrowed from menu
     public PurchaseMenu(InputStream input, OutputStream output) {
@@ -65,29 +65,52 @@ public class PurchaseMenu extends Menu{
         System.out.println("Insert whole dollar amounts. Does not Accept $50 or $100 bills. ");
         Scanner userFeed = new Scanner(System.in);
         String feed = userFeed.nextLine();
+        feedBalance(Integer.parseInt(feed));
 
         System.out.println("Balance is now: $" + Double.parseDouble(feed));
         return Double.parseDouble(feed);
     }
+    //method for returning coin to customer
+    public double returnChange(){
+        //statement to calculate quart, nicks, dimes
+        //define coin amounts
+        double quarter = 0.25;
+        double nickle = 0.05;
+        double dime = 0.10;
 
-    //get balance method
-    public double getBalance(){
-        double newBalance = feedMoney();
-        setBalance(newBalance);
+        //round balance down
+        double modQuarters = ( (double)(int) Math.round((balance % quarter)*100) / 100.0);
+        double modDimes = ( (double)(int) Math.round((modQuarters % dime)*100) / 100.0);
+        double modNickles = ( (double)(int) Math.round((modQuarters) % nickle)*100)/100.0;
 
-        if (balance > 0){
-            newBalance = balance + feedMoney();
-            setBalance(newBalance);
-        }
+        //count coins up
+        int numQuarters = (int)((balance-modQuarters) / (quarter));
+        int numDimes = (int)((modQuarters-modDimes)/(dime));
+        int numNickles = (int)((modDimes-modNickles)/(nickle));
 
-        return balance;
+        System.out.println("Calculating your change, please wait...");
+        //display amounts to user
+        System.out.println(System.lineSeparator() + balance + "returning to you in the form of: "+ numQuarters+" quarters, " + numDimes + " dimes, and " + numNickles+ " nickles.");
+        //reset balance
+        this.balance = 0;
+
+        return this.balance;
     }
 
-    //updating balance with new amount
-    public void setBalance(double balance) {
-        this.balance = balance;
+    //feed balance method
+    public double feedBalance(int feed){
+        this.balance = getBalance() + feed;
+        return this.balance;
+    }
+
+    //remove balance method
+    public double removeBalance(double cost){
+        this.balance = getBalance() - cost;
+        return this.balance;
     }
 
     //getter
-
+    public double getBalance() {
+        return balance;
+    }
 }

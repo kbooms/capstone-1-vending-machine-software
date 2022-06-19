@@ -8,14 +8,15 @@ public class Product {
     private String type;
     private String key;
 
-    private int inventory = 5;
+    private int inventory;
 
     //constructor
-    public Product(String key, String name, double cost, String type){
+    public Product(String key, String name, double cost, String type, int inventory){
         this.key = key;
         this.name = name;
         this.cost = cost;
         this.type = type;
+        this.inventory = inventory;
 
     }
     //message method
@@ -36,25 +37,27 @@ public class Product {
         return message;
     }
 
+    public int getReducedInventory(boolean purchasable){
+
+        if (purchasable == true){
+            this.inventory = getInventory()-1;
+        }
+        return this.inventory;
+    }
 
     //getters
-
     public String getName() {
         return name;
     }
-
     public double getCost() {
         return cost;
     }
-
     public String getType() {
         return type;
     }
-
     public String getKey() {
         return key;
     }
-
     public int getInventory() {
         return inventory;
     }
@@ -64,15 +67,12 @@ public class Product {
     public void setName(String name) {
         this.name = name;
     }
-
     public void setCost(double cost) {
         this.cost = cost;
     }
-
     public void setType(String type) {
         this.type = type;
     }
-
     public void setKey(String key) {
         this.key = key;
     }

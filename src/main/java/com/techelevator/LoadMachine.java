@@ -21,7 +21,7 @@ public class LoadMachine {
                String lineOfInput = inventoryInput.nextLine();
                String[] splitLine = lineOfInput.split("[|]");
             //assign values?
-               Product object = new Product(splitLine[0],splitLine[1],Double.parseDouble(splitLine[2]),splitLine[3] );
+               Product object = new Product(splitLine[0],splitLine[1],Double.parseDouble(splitLine[2]),splitLine[3], 5 );
                 //hopefully adding each new line to a different spot in map
                products.put(object.getKey(), object);
                keys.add(splitLine[0]);

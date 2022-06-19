@@ -5,7 +5,7 @@ import com.techelevator.view.PurchaseMenu;
 
 public class VendingMachineCLI extends LoadMachine {
 
-	//static methods for [] defining
+	//static variables for [] defining
 	private static final String PURCHASE_MENU_FEED_MONEY = "Feed Money";
 	private static final String PURCHASE_MENU_SELECT_PRODUCT = "Select Product";
 	private static final String PURCHASE_MENU_FINISH = "Finish Transaction";
@@ -48,6 +48,8 @@ public class VendingMachineCLI extends LoadMachine {
 					//add to balance in terms of 1,2,5,10,20s
 					//adjust balance shown in menu to new balance
 					//return to purchase menu
+					purchaseMenu.feedMoney();
+					System.out.println(purchaseMenu.getBalance());
 				}else if (choice2.equals(PURCHASE_MENU_SELECT_PRODUCT)){
 					//display products
 					//allow input of which 'key' to buy
@@ -61,7 +63,10 @@ public class VendingMachineCLI extends LoadMachine {
 					//return to main menu
 				}
 			}else if (choice.equals(MAIN_MENU_OPTION_EXIT)){
+				// may need to check that balance is zero before exiting
+				// return any change
 				//end program
+				System.out.println("\nThank you for using the Vendo-matic 800");break;
 			}else if (choice.equals(MAIN_MENU_OPTION_REPORT)){
 				//secret programs
 			}
