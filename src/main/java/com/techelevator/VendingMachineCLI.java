@@ -3,7 +3,9 @@ package com.techelevator;
 import com.techelevator.view.Menu;
 import com.techelevator.view.PurchaseMenu;
 
-public class VendingMachineCLI extends LoadMachine {
+import java.util.Scanner;
+
+public class VendingMachineCLI {
 
 	//static variables for [] defining
 	private static final String PURCHASE_MENU_FEED_MONEY = "Feed Money";
@@ -25,20 +27,21 @@ public class VendingMachineCLI extends LoadMachine {
 	private Menu menu;
 	//new purchase menu item for run method
 	private PurchaseMenu purchaseMenu;
+	private LoadMachine loadMachine;
+	private Purchase purchase;
 
 	//added purchase menu to the cli constructor
-	public VendingMachineCLI(Menu menu, PurchaseMenu purchaseMenu) {
-		this.menu = menu; this.purchaseMenu = purchaseMenu;
+	public VendingMachineCLI(Menu menu, PurchaseMenu purchaseMenu, LoadMachine loadMachine, Purchase purchase) {
+		this.menu = menu; this.purchaseMenu = purchaseMenu; this.loadMachine = loadMachine; this.purchase = purchase;
 	}
 
 	public void run() {
-		LoadMachine restock = new LoadMachine();
 
 		while (true) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
-				showProducts(restock);
+				loadMachine.showProducts();
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				while (true) {
 					String choice2 = (String) purchaseMenu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
@@ -48,8 +51,17 @@ public class VendingMachineCLI extends LoadMachine {
 						System.out.println(purchaseMenu.getBalance());
 					} else if (choice2.equals(PURCHASE_MENU_SELECT_PRODUCT)) {
 						//display products
-						showProducts(restock);
+						loadMachine.showProducts();
 						//allow input of which 'key' to buy
+						purchase.purchasing();
+						if((!loadMachine.products.containsKey(purchase.getTempProductKey()) || loadMachine.products.get(purchase.getTempProductKey()).getInventory() == 0)){
+							System.out.println("Sorry that item is unavailable, returning to purchase menu: ");
+						}else{
+							System.out.println("Item purchased, dispensing item:" + loadMachine.products.get(purchase.getTempProductKey()).getMessage());
+							purchaseMenu.removeBalance(loadMachine.products.get(purchase.getTempProductKey()).getCost());
+							loadMachine.products.get(purchase.getTempProductKey()).getReducedInventory(true);
+							
+						}
 						//remove cost from balance
 						//reduce inventory by 1 for that key
 						//print message
@@ -77,7 +89,9 @@ public class VendingMachineCLI extends LoadMachine {
 	public static void main(String[] args) {
 		Menu menu = new Menu(System.in, System.out);
 		PurchaseMenu purchaseMenu = new PurchaseMenu(System.in, System.out);
-		VendingMachineCLI cli = new VendingMachineCLI(menu, purchaseMenu);
+		LoadMachine loadMachine = new LoadMachine();
+		Purchase purchase = new Purchase();
+		VendingMachineCLI cli = new VendingMachineCLI(menu, purchaseMenu, loadMachine, purchase);
 		cli.run();
 	}
 }

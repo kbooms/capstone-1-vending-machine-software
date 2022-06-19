@@ -35,7 +35,7 @@ public class LoadMachine {
     }
 
     //Printing out products for options 1 and 2
-    public String showProducts(LoadMachine restock) {
+    public String showProducts() {
 
 
         for (int i = 0; i < keys.size(); i++) {

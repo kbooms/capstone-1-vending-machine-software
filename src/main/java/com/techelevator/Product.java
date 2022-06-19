@@ -39,7 +39,7 @@ public class Product {
 
     public int getReducedInventory(boolean purchasable){
 
-        if (purchasable == true){
+        if (purchasable == true && inventory>0){
             this.inventory = getInventory()-1;
         }
         return this.inventory;
