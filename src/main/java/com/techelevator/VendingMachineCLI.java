@@ -38,37 +38,38 @@ public class VendingMachineCLI extends LoadMachine {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
-				// display vending machine items
 				showProducts(restock);
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
-				// show purchase menu
-				String choice2 = (String) purchaseMenu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
+				while (true) {
+					String choice2 = (String) purchaseMenu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 
-				if (choice2.equals(PURCHASE_MENU_FEED_MONEY)){
-					//add to balance in terms of 1,2,5,10,20s
-					//adjust balance shown in menu to new balance
-					//return to purchase menu
-					purchaseMenu.feedMoney();
-					System.out.println(purchaseMenu.getBalance());
-				}else if (choice2.equals(PURCHASE_MENU_SELECT_PRODUCT)){
-					//display products
-					//allow input of which 'key' to buy
-					// remove cost from balance
-					//reduce inventory by 1 for that key
-					//print message
-					//return to Purchase menu
-				}else if (choice2.equals(PURCHASE_MENU_FINISH)){
-					//"return" balance left in machine in quarters, dimes, nickles
-					//set balance back to 0
-					//return to main menu
+					if (choice2.equals(PURCHASE_MENU_FEED_MONEY)) {
+						purchaseMenu.feedMoney();
+						System.out.println(purchaseMenu.getBalance());
+					} else if (choice2.equals(PURCHASE_MENU_SELECT_PRODUCT)) {
+						//display products
+						showProducts(restock);
+						//allow input of which 'key' to buy
+						//remove cost from balance
+						//reduce inventory by 1 for that key
+						//print message
+						//return to Purchase menu
+					} else if (choice2.equals(PURCHASE_MENU_FINISH)) {
+						purchaseMenu.returnChange();
+						break;
+					}
+					continue;
 				}
 			}else if (choice.equals(MAIN_MENU_OPTION_EXIT)){
-				// may need to check that balance is zero before exiting
-				// return any change
-				//end program
 				System.out.println("\nThank you for using the Vendo-matic 800");break;
 			}else if (choice.equals(MAIN_MENU_OPTION_REPORT)){
 				//secret programs
+				//public void salesReport() {
+					// sales report code
+					// verify 'ADMIN' access
+					// get total count of current sales from log file
+					//
+
 			}
 		}
 	}

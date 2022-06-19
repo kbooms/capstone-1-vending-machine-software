@@ -55,7 +55,7 @@ public class PurchaseMenu extends Menu{
             int optionNum = i + 1;
             out.println("(" + optionNum + ") " + options[i]);
         }
-        out.print(System.lineSeparator() + noFeedBalance + System.lineSeparator() + "Please choose a number corresponding with the requested option: ");
+        out.print(System.lineSeparator() + "Current provided balance: $" + getBalance() + System.lineSeparator() + "Please choose a number corresponding with the requested option: ");
         out.flush();
     }
 
@@ -90,7 +90,7 @@ public class PurchaseMenu extends Menu{
 
         System.out.println("Calculating your change, please wait...");
         //display amounts to user
-        System.out.println(System.lineSeparator() + balance + "returning to you in the form of: "+ numQuarters+" quarters, " + numDimes + " dimes, and " + numNickles+ " nickles.");
+        System.out.println(System.lineSeparator() + balance + " returning to you in the form of: "+ numQuarters+" quarters, " + numDimes + " dimes, and " + numNickles+ " nickles.");
         //reset balance
         this.balance = 0;
 

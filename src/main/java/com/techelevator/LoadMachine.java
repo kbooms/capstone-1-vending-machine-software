@@ -40,7 +40,7 @@ public class LoadMachine {
 
         for (int i = 0; i < keys.size(); i++) {
 
-            System.out.println(products.get(keys.get(i)).getKey() + " | " + products.get(keys.get(i)).getName() + " | " + products.get(keys.get(i)).getCost() );
+            System.out.println(products.get(keys.get(i)).getKey() + " | " + products.get(keys.get(i)).getName() + " | " + products.get(keys.get(i)).getCost() +" | " + products.get(keys.get(i)).isSoldOut());
         }
         return "Back to Main menu.";
     }

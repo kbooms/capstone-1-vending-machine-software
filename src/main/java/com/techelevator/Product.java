@@ -45,6 +45,17 @@ public class Product {
         return this.inventory;
     }
 
+    public String isSoldOut(){
+        int heldInventory = getInventory();
+        String isInventory;
+        if (heldInventory == 0){
+            isInventory = "SOLD OUT";
+        }else{
+            isInventory = "AVAILABLE";
+        }
+        return isInventory;
+    }
+
     //getters
     public String getName() {
         return name;
