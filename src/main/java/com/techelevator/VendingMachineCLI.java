@@ -30,9 +30,11 @@ public class VendingMachineCLI {
 	private LoadMachine loadMachine;
 	private Purchase purchase;
 
+	private PurchaseLogger logger;
+
 	//added purchase menu to the cli constructor
-	public VendingMachineCLI(Menu menu, PurchaseMenu purchaseMenu, LoadMachine loadMachine, Purchase purchase) {
-		this.menu = menu; this.purchaseMenu = purchaseMenu; this.loadMachine = loadMachine; this.purchase = purchase;
+	public VendingMachineCLI(Menu menu, PurchaseMenu purchaseMenu, LoadMachine loadMachine, Purchase purchase, PurchaseLogger logger) {
+		this.menu = menu; this.purchaseMenu = purchaseMenu; this.loadMachine = loadMachine; this.purchase = purchase; this.logger = logger;
 	}
 
 	public void run() {
@@ -53,6 +55,7 @@ public class VendingMachineCLI {
 						loadMachine.showProducts();
 						//allow input of which 'key' to buy
 						purchase.purchasing();
+						logger.logPurchase(purchase.getTempProductKey() + " $" + purchaseMenu.getBalance());
 						// v make into a helper menu?
 						if((!loadMachine.getProducts().containsKey(purchase.getTempProductKey()) || loadMachine.getProducts().get(purchase.getTempProductKey()).getInventory() == 0)){
 							System.out.println("Sorry that item is unavailable, returning to purchase menu: ");
@@ -91,7 +94,8 @@ public class VendingMachineCLI {
 		PurchaseMenu purchaseMenu = new PurchaseMenu(System.in, System.out);
 		LoadMachine loadMachine = new LoadMachine();
 		Purchase purchase = new Purchase();
-		VendingMachineCLI cli = new VendingMachineCLI(menu, purchaseMenu, loadMachine, purchase);
+		PurchaseLogger logger = new PurchaseLogger();
+		VendingMachineCLI cli = new VendingMachineCLI(menu, purchaseMenu, loadMachine, purchase, logger);
 		cli.run();
 	}
 }
