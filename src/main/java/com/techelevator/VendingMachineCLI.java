@@ -36,7 +36,7 @@ public class VendingMachineCLI {
 	}
 
 	public void run() {
-
+		loadMachine.machineLoaded();
 		while (true) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
@@ -54,12 +54,12 @@ public class VendingMachineCLI {
 						//allow input of which 'key' to buy
 						purchase.purchasing();
 						// v make into a helper menu?
-						if((!loadMachine.products.containsKey(purchase.getTempProductKey()) || loadMachine.products.get(purchase.getTempProductKey()).getInventory() == 0)){
+						if((!loadMachine.getProducts().containsKey(purchase.getTempProductKey()) || loadMachine.getProducts().get(purchase.getTempProductKey()).getInventory() == 0)){
 							System.out.println("Sorry that item is unavailable, returning to purchase menu: ");
 						}else{
-							System.out.println("Item purchased, dispensing item: " + loadMachine.products.get(purchase.getTempProductKey()).getMessage());
-							purchaseMenu.removeBalance(loadMachine.products.get(purchase.getTempProductKey()).getCost());
-							loadMachine.products.get(purchase.getTempProductKey()).getReducedInventory(true);
+							System.out.println("Item purchased, dispensing item: " + loadMachine.getProducts().get(purchase.getTempProductKey()).getMessage());
+							purchaseMenu.removeBalance(loadMachine.getProducts().get(purchase.getTempProductKey()).getCost());
+							loadMachine.getProducts().get(purchase.getTempProductKey()).getReducedInventory(true);
 
 						}
 						//remove cost from balance

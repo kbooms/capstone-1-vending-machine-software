@@ -6,12 +6,14 @@ import java.util.*;
 
 public class LoadMachine {
 //map and file path
-    Map<String, Product> products = new HashMap<>();
-    List<String> keys = new ArrayList<>();
-    File productInventory = new File("vendingmachine.csv");
+    private static Map<String, Product> products = new HashMap<>();
+    private static List<String> keys = new ArrayList<>();
+    private final File productInventory = new File("vendingmachine.csv");
 //privatize map
 //method for assigning data from file to map
-    {
+    public LoadMachine(){}
+
+    public String machineLoaded() {
         try {
             //reading file
            Scanner inventoryInput = new Scanner(productInventory);
@@ -32,6 +34,7 @@ public class LoadMachine {
         } catch (FileNotFoundException e) {
             System.err.println("Inventory not found.");
         }
+        return "Machine Loaded.";
     }
 
     //Printing out products for options 1 and 2
@@ -40,10 +43,19 @@ public class LoadMachine {
 
         for (int i = 0; i < keys.size(); i++) {
 
-            System.out.println(products.get(keys.get(i)).getKey() + " | " + products.get(keys.get(i)).getName() + " | " + products.get(keys.get(i)).getCost() +" | " + products.get(keys.get(i)).isSoldOut());
+            System.out.println(getProducts().get(getKeys().get(i)).getKey() + " | " + getProducts().get(getKeys().get(i)).getName() + " | " + getProducts().get(getKeys().get(i)).getCost() +" | " + getProducts().get(getKeys().get(i)).isSoldOut());
         }
         return "Back to Main menu.";
     }
 
+    //getter
 
+
+    public Map<String, Product> getProducts() {
+        return products;
+    }
+
+    public List<String> getKeys() {
+        return keys;
+    }
 }
