@@ -48,19 +48,19 @@ public class VendingMachineCLI {
 
 					if (choice2.equals(PURCHASE_MENU_FEED_MONEY)) {
 						purchaseMenu.feedMoney();
-						System.out.println(purchaseMenu.getBalance());
 					} else if (choice2.equals(PURCHASE_MENU_SELECT_PRODUCT)) {
 						//display products
 						loadMachine.showProducts();
 						//allow input of which 'key' to buy
 						purchase.purchasing();
+						// v make into a helper menu?
 						if((!loadMachine.products.containsKey(purchase.getTempProductKey()) || loadMachine.products.get(purchase.getTempProductKey()).getInventory() == 0)){
 							System.out.println("Sorry that item is unavailable, returning to purchase menu: ");
 						}else{
-							System.out.println("Item purchased, dispensing item:" + loadMachine.products.get(purchase.getTempProductKey()).getMessage());
+							System.out.println("Item purchased, dispensing item: " + loadMachine.products.get(purchase.getTempProductKey()).getMessage());
 							purchaseMenu.removeBalance(loadMachine.products.get(purchase.getTempProductKey()).getCost());
 							loadMachine.products.get(purchase.getTempProductKey()).getReducedInventory(true);
-							
+
 						}
 						//remove cost from balance
 						//reduce inventory by 1 for that key

@@ -9,7 +9,7 @@ public class LoadMachine {
     Map<String, Product> products = new HashMap<>();
     List<String> keys = new ArrayList<>();
     File productInventory = new File("vendingmachine.csv");
-
+//privatize map
 //method for assigning data from file to map
     {
         try {

@@ -21,6 +21,7 @@ public class Product {
     }
     //message method
     //split case so recall getType() of product for purchase
+    //split into separate classes?
     public String getMessage(){
 
         String message = "";

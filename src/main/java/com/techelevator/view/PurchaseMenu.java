@@ -55,7 +55,7 @@ public class PurchaseMenu extends Menu{
             int optionNum = i + 1;
             out.println("(" + optionNum + ") " + options[i]);
         }
-        out.print(System.lineSeparator() + "Current provided balance: $" + getBalance() + System.lineSeparator() + "Please choose a number corresponding with the requested option: ");
+        out.printf(System.lineSeparator() + "Current provided balance: $ %.2f"  + System.lineSeparator() + "Please choose a number corresponding with the requested option: ",getBalance());
         out.flush();
     }
 
@@ -67,7 +67,7 @@ public class PurchaseMenu extends Menu{
         String feed = userFeed.nextLine();
         feedBalance(Integer.parseInt(feed));
 
-        System.out.println("Balance is now: $" + Double.parseDouble(feed));
+        System.out.printf("Balance is now: $ %.2f", Double.parseDouble(feed));
         return Double.parseDouble(feed);
     }
     //method for returning coin to customer
