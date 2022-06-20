@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class Purchase {
     //product key
+    String productKey;
     String tempProductKey;
     public Purchase(){}
 
@@ -25,6 +26,10 @@ public class Purchase {
 
     public String getTempProductKey() {
         return tempProductKey;
+    }
+
+    public String getProductKey() {
+        return productKey;
     }
 
 }

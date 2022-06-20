@@ -22,6 +22,7 @@ public class PurchaseMenu extends Menu{
         this.out = new PrintWriter(output);
         this.in = new Scanner(input);
     }
+
     //borrowed from menu
     public Object getChoiceFromOptions(Object[] options) {
         Object choice = null;
