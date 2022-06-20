@@ -9,10 +9,9 @@ public class LoadMachine {
     private static Map<String, Product> products = new HashMap<>();
     private static List<String> keys = new ArrayList<>();
     private final File productInventory = new File("vendingmachine.csv");
-//privatize map
-//method for assigning data from file to map
+    //constructor
     public LoadMachine(){}
-
+    //method for assigning data from file to map
     public String machineLoaded() {
         try {
             //reading file
@@ -45,7 +44,7 @@ public class LoadMachine {
 
             System.out.println(getProducts().get(getKeys().get(i)).getKey() + " | " + getProducts().get(getKeys().get(i)).getName() + " | " + getProducts().get(getKeys().get(i)).getCost() +" | " + getProducts().get(getKeys().get(i)).isSoldOut());
         }
-        return "Back to Main menu.";
+        return "\r\nBack to Main menu.";
     }
 
     //getter

@@ -1,5 +1,6 @@
 package com.techelevator;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Purchase {
@@ -13,11 +14,12 @@ public class Purchase {
         Scanner userSelect = new Scanner(System.in);
         System.out.print("Please enter key of the item you'd like: ");
         String productKey = userSelect.nextLine();
-        System.out.println("You selected: " + productKey);
+        System.out.println("You selected: " + productKey.toUpperCase(Locale.ROOT));
 
-        this.tempProductKey = productKey;
+        this.tempProductKey = productKey.toUpperCase(Locale.ROOT);
         return tempProductKey;
     }
+
 
     //getter
 
@@ -25,10 +27,4 @@ public class Purchase {
         return tempProductKey;
     }
 
-
-    //if(key!exist || inventory == 0){
-    //"Sorry this item is not available, returning to purchase menu:..."
-    //}else {
-    //"Dispensing product + product message."
-    //remove cost from balance
 }

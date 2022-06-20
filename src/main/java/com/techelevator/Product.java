@@ -19,9 +19,9 @@ public class Product {
         this.inventory = inventory;
 
     }
+
     //message method
     //split case so recall getType() of product for purchase
-    //split into separate classes?
     public String getMessage(){
 
         String message = "";
@@ -38,6 +38,7 @@ public class Product {
         return message;
     }
 
+    //reducing the inventory
     public int getReducedInventory(boolean purchasable){
 
         if (purchasable == true && inventory>0){
@@ -45,7 +46,7 @@ public class Product {
         }
         return this.inventory;
     }
-
+    //changing available -> sold out
     public String isSoldOut(){
         int heldInventory = getInventory();
         String isInventory;
@@ -74,18 +75,5 @@ public class Product {
         return inventory;
     }
 
-    //setters
 
-    public void setName(String name) {
-        this.name = name;
-    }
-    public void setCost(double cost) {
-        this.cost = cost;
-    }
-    public void setType(String type) {
-        this.type = type;
-    }
-    public void setKey(String key) {
-        this.key = key;
-    }
 }
