@@ -17,8 +17,7 @@ public class PurchaseMenu extends Menu{
     private double balance;
     private double adjustedBalance;
 
-    private String adjustedBal = String.format("%.2f",getAdjustedBalance());
-    private String bal = String.format("%.2f",getBalance());
+    private double unAlteredBalance;
 
    //super constructor borrowed from menu
     public PurchaseMenu(InputStream input, OutputStream output) {
@@ -59,19 +58,19 @@ public class PurchaseMenu extends Menu{
             int optionNum = i + 1;
             out.println("(" + optionNum + ") " + options[i]);
         }
-        out.printf(System.lineSeparator() + "Current provided balance: $ %.2f"  + System.lineSeparator() + "Please choose a number corresponding with the requested option: ",getAdjustedBalance());
+        out.printf(System.lineSeparator() + "Current provided balance: $ %.2f"  + System.lineSeparator() + "\r\nPlease choose a number corresponding with the requested option: ",getAdjustedBalance());
         out.flush();
     }
 
 
     //method for taking cash from customer
     public double feedMoney(){
-        System.out.println("Insert whole dollar amounts. Does not Accept $50 or $100 bills. ");
+        System.out.println("\r\nInsert whole dollar amounts. Does not Accept $50 or $100 bills. ");
         Scanner userFeed = new Scanner(System.in);
         String feed = userFeed.nextLine();
         feedBalance(Integer.parseInt(feed));
 
-        System.out.printf("Balance is now: $ %.2f", Double.parseDouble(feed));
+        System.out.printf("\r\nBalance is now: $ %.2f", getBalance());
         return Double.parseDouble(feed);
     }
     //method for returning coin to customer
@@ -92,35 +91,51 @@ public class PurchaseMenu extends Menu{
         int numDimes = (int)((modQuarters-modDimes)/(dime));
         int numNickles = (int)((modDimes-modNickles)/(nickle));
 
-        System.out.println("Calculating your change, please wait...");
+        System.out.println("\r\nCalculating your change, please wait...");
         //display amounts to user
-        System.out.println(System.lineSeparator() + getAdjustedBal() + " returning to you in the form of: "+ numQuarters+" quarters, " + numDimes + " dimes, and " + numNickles+ " nickles.");
+        System.out.printf(System.lineSeparator() + "$ %.2f returning to you in the form of: "+ numQuarters+" quarters, " + numDimes + " dimes, and " + numNickles+ " nickles." + System.lineSeparator(),getAdjustedBalance());
         //reset balance
-        this.adjustedBalance = 0;
-        this.balance = 0;
+        this.adjustedBalance = 0.00;
+        this.balance = 0.00;
 
         return this.balance;
     }
 
     //feed balance method
     public double feedBalance(int feed){
-        this.balance = getBalance() + feed;
-        this.adjustedBalance = balance;
-        this.bal = getBal();
-        this.adjustedBal = getAdjustedBal();
+
+        if(feed == 1 || feed == 2 || feed == 5 || feed == 10||feed == 20){
+            System.out.println("\r\nAdding $" + feed + " to your balance.");
+            this.balance = getBalance() + feed;
+            this.adjustedBalance = balance;
+            this.unAlteredBalance = getBalance();
+            if(getUnAlteredBalance()==0){
+                this.unAlteredBalance = 0;
+            }else{
+                this.unAlteredBalance = getBalance() - feed;
+            }
+        }else {
+            System.out.println("\r\nSorry, this machine only accepts whole dollar amounts in the form of $1, $2, $5, $10 and $20. Please try again.\r\n");
+            this.balance = getBalance();
+            this.unAlteredBalance = getBalance();
+        }
+
         return this.balance;
     }
 
     //remove balance method
-    public double removeBalance(double cost){
+    public double removeBalance(double cost) {
 
-        if(cost == 0){
+        if (cost == 0) {
             this.adjustedBalance = getBalance();
-            this.adjustedBal = getBal();
+            this.unAlteredBalance = getBalance();
+        } else {
+            this.adjustedBalance = getBalance() - cost;
+            this.balance = adjustedBalance;
+            this.unAlteredBalance = getBalance() + cost;
         }
-        this.adjustedBalance = getBalance() - cost;
-        this.adjustedBal = getAdjustedBal();
-        return this.adjustedBalance;
+
+        return getAdjustedBalance();
     }
 
     //getter
@@ -130,12 +145,7 @@ public class PurchaseMenu extends Menu{
     public double getAdjustedBalance(){
         return adjustedBalance;
     }
-
-    public String getAdjustedBal() {
-        return adjustedBal;
-    }
-
-    public String getBal() {
-        return bal;
+    public double getUnAlteredBalance(){
+        return unAlteredBalance;
     }
 }

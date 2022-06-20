@@ -50,6 +50,7 @@ public class VendingMachineCLI {
 
 					if (choice2.equals(PURCHASE_MENU_FEED_MONEY)) {
 						purchaseMenu.feedMoney();
+						logger.logPurchase("FEED MONEY: $" + purchaseMenu.getUnAlteredBalance() +" $"+ purchaseMenu.getAdjustedBalance());
 					} else if (choice2.equals(PURCHASE_MENU_SELECT_PRODUCT)) {
 						//display products
 						loadMachine.showProducts();
@@ -59,18 +60,19 @@ public class VendingMachineCLI {
 						if((!loadMachine.getProducts().containsKey(purchase.getTempProductKey()) || loadMachine.getProducts().get(purchase.getTempProductKey()).getInventory() == 0)){
 							System.out.println("Sorry that item is unavailable, returning to purchase menu: ");
 						}else{
-							System.out.println("Item purchased, dispensing item: " + loadMachine.getProducts().get(purchase.getTempProductKey()).getMessage());
+							System.out.println("\r\nItem purchased, dispensing item: " + loadMachine.getProducts().get(purchase.getTempProductKey()).getMessage() + System.lineSeparator());
 							purchaseMenu.removeBalance(loadMachine.getProducts().get(purchase.getTempProductKey()).getCost());
 							loadMachine.getProducts().get(purchase.getTempProductKey()).getReducedInventory(true);
 
 						}
-						logger.logPurchase(loadMachine.getProducts().get(purchase.getTempProductKey()).getName() + " $" + purchaseMenu.getBal() + " $" + purchaseMenu.getAdjustedBal());
+						logger.logPurchase(loadMachine.getProducts().get(purchase.getTempProductKey()).getName() + " " + loadMachine.getProducts().get(purchase.getTempProductKey()).getKey() + " $" + purchaseMenu.getUnAlteredBalance() + " $" + purchaseMenu.getAdjustedBalance());
 						//remove cost from balance
 						//reduce inventory by 1 for that key
 						//print message
 						//return to Purchase menu
 					} else if (choice2.equals(PURCHASE_MENU_FINISH)) {
 						purchaseMenu.returnChange();
+						logger.logPurchase("CHANGE DISPENSED: $" + purchaseMenu.getUnAlteredBalance() + " $" + purchaseMenu.getBalance());
 						break;
 					}
 					continue;
